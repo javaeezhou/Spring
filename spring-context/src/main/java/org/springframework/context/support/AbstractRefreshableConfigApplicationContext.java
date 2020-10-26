@@ -82,6 +82,7 @@ public abstract class AbstractRefreshableConfigApplicationContext extends Abstra
 			this.configLocations = new String[locations.length];
 			for (int i = 0; i < locations.length; i++) {
 				//赋值传过来的路径
+				//resolvePath获取系统环境变量
 				this.configLocations[i] = resolvePath(locations[i]).trim();
 			}
 		}
@@ -126,6 +127,7 @@ public abstract class AbstractRefreshableConfigApplicationContext extends Abstra
 	 * @see org.springframework.core.env.Environment#resolveRequiredPlaceholders(String)
 	 */
 	protected String resolvePath(String path) {
+		//此时容器并未读取配置的属性值，必须来次get，将系统环境变量的值来一次获取工作
 		return getEnvironment().resolveRequiredPlaceholders(path);
 	}
 

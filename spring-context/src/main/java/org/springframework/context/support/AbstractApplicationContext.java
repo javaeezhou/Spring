@@ -163,6 +163,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	/** Logger used by this class. Available to subclasses. */
 	protected final Log logger = LogFactory.getLog(getClass());
 
+	//创建上下文的唯一标识
 	/** Unique id for this context, if any. */
 	private String id = ObjectUtils.identityToString(this);
 
@@ -177,6 +178,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	@Nullable
 	private ConfigurableEnvironment environment;
 
+	//修改bean定义信息的集合
 	/** BeanFactoryPostProcessors to apply on refresh. */
 	private final List<BeanFactoryPostProcessor> beanFactoryPostProcessors = new ArrayList<>();
 
@@ -189,6 +191,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	/** Flag that indicates whether this context has been closed already. */
 	private final AtomicBoolean closed = new AtomicBoolean();
 
+	//refresh的锁
 	/** Synchronization monitor for the "refresh" and "destroy". */
 	private final Object startupShutdownMonitor = new Object();
 

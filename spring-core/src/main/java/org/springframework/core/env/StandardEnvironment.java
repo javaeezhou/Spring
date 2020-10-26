@@ -75,6 +75,7 @@ public class StandardEnvironment extends AbstractEnvironment {
 	 */
 	@Override
 	protected void customizePropertySources(MutablePropertySources propertySources) {
+		//两个get都是去获取系统的环境值
 		propertySources.addLast(
 				new PropertiesPropertySource(SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME, getSystemProperties()));
 		propertySources.addLast(
