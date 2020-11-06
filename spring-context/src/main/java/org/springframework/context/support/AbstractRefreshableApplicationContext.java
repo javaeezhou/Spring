@@ -64,9 +64,11 @@ import org.springframework.lang.Nullable;
  */
 public abstract class AbstractRefreshableApplicationContext extends AbstractApplicationContext {
 
+	// 是否允许覆盖beanDefinition信息
 	@Nullable
 	private Boolean allowBeanDefinitionOverriding;
 
+	// 是否允许循环依赖
 	@Nullable
 	private Boolean allowCircularReferences;
 
@@ -119,14 +121,19 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 */
 	@Override
 	protected final void refreshBeanFactory() throws BeansException {
+		// 如果存在beanFactory，则销毁beanFactory
 		if (hasBeanFactory()) {
 			destroyBeans();
 			closeBeanFactory();
 		}
 		try {
+			// 创建DefaultListableBeanFactory对象 -> 随着继承关系完成一些属性的初始化 如果有父容器就进行一次set父容器的工作
 			DefaultListableBeanFactory beanFactory = createBeanFactory();
+			// 设置容器id（序列化id），可以根据此id反序列化出beanFactory对象。
 			beanFactory.setSerializationId(getId());
+			// 定制beanFactory，设置相关属性，包括是否允许覆盖同名称的不同定义的对象以及循环依赖
 			customizeBeanFactory(beanFactory);
+			// 开始完成beanDefinitions的加载 里面有一些重载的方法 目的是 String[] -> String -> Resource[] -> Resource
 			loadBeanDefinitions(beanFactory);
 			this.beanFactory = beanFactory;
 		}
@@ -211,10 +218,13 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 * @see DefaultListableBeanFactory#setAllowRawInjectionDespiteWrapping
 	 * @see DefaultListableBeanFactory#setAllowEagerClassLoading
 	 */
+	// 此方法可以被子类重写，用于扩展功能，比如是否允许覆盖bean定义信息和是否允许循环依赖
 	protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
+		// 如果属性allowBeanDefinitionOverriding不为空，设置给beanFactory对象相应属性，是否允许覆盖同名称的不同定义的对象
 		if (this.allowBeanDefinitionOverriding != null) {
 			beanFactory.setAllowBeanDefinitionOverriding(this.allowBeanDefinitionOverriding);
 		}
+		// 如果属性allowCircularReferences不为空，设置给beanFactory对象相应属性，是否允许bean之间存在循环依赖
 		if (this.allowCircularReferences != null) {
 			beanFactory.setAllowCircularReferences(this.allowCircularReferences);
 		}

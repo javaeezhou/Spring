@@ -7,6 +7,10 @@ package cn.bt.entity;
 public class A {
 	private String name;
 
+	public A(String name) {
+		this.name = name;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -17,6 +21,6 @@ public class A {
 
 	@Override
 	public String toString() {
-		return "我是真的帅";
+		return "我是真的帅 ->" + this.name;
 	}
 }

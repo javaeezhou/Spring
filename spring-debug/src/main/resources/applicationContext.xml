@@ -7,6 +7,8 @@
 
 
     <bean id="a"  class="cn.bt.entity.A" >
-    </bean>
+
+		<constructor-arg value="你在赣神魔"/>
+	</bean>
 
 </beans>
