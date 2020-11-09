@@ -109,6 +109,7 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 
 	private final MutablePropertySources propertySources = new MutablePropertySources();
 
+	//此分解器可以用来验证系统环境变量是否包含某一变量
 	private final ConfigurablePropertyResolver propertyResolver =
 			new PropertySourcesPropertyResolver(this.propertySources);
 
