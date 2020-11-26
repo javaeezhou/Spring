@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aaa="http://www.zq.com/schema/user"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.zq.com/schema/user  http://www.zq.com/schema/user.xsd">
+
+	<aaa:zq id="user1" username="周谦" email="www.123@qq.com"/>
+
+</beans>
