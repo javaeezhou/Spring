@@ -7,13 +7,17 @@
         <property name="name" value="zhangsan"></property>
         <property name="address" value="湖北省_黄冈市_黄州区"></property>
     </bean>
-<!--    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">-->
-<!--        <property name="propertyEditorRegistrars">-->
-<!--            <list>-->
-<!--                <bean class="com.mashibing.selfEditor.AddressPropertyEditorRegistrar"></bean>-->
-<!--            </list>-->
-<!--        </property>-->
-<!--    </bean>-->
+
+	<!--第一种方式-->
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="propertyEditorRegistrars">
+            <list>
+                <bean class="cn.bt.selfEditor.AddressPropertyEditorRegistrar"></bean>
+            </list>
+        </property>
+    </bean>
+
+	<!--第二种方式-->
     <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
         <property name="customEditors">
             <map>

@@ -144,6 +144,7 @@ public class CustomEditorConfigurer implements BeanFactoryPostProcessor, Ordered
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		if (this.propertyEditorRegistrars != null) {
 			for (PropertyEditorRegistrar propertyEditorRegistrar : this.propertyEditorRegistrars) {
+				// 将属性编辑器添加到beanFactory中
 				beanFactory.addPropertyEditorRegistrar(propertyEditorRegistrar);
 			}
 		}
