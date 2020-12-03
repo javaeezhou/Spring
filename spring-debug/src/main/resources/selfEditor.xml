@@ -18,13 +18,13 @@
     </bean>
 
 	<!--第二种方式-->
-    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
-        <property name="customEditors">
-            <map>
-                <entry key="cn.bt.selfEditor.Address">
-                    <value>cn.bt.selfEditor.AddressPropertyEditor</value>
-                </entry>
-            </map>
-        </property>
-    </bean>
+<!--    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">-->
+<!--        <property name="customEditors">-->
+<!--            <map>-->
+<!--                <entry key="cn.bt.selfEditor.Address">-->
+<!--                    <value>cn.bt.selfEditor.AddressPropertyEditor</value>-->
+<!--                </entry>-->
+<!--            </map>-->
+<!--        </property>-->
+<!--    </bean>-->
 </beans>

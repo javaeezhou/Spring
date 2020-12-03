@@ -1434,6 +1434,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			}
 		}
 
+		// PropertyValues pvs --> 存放实例化对象中的所有属性信息
 		PropertyValues pvs = (mbd.hasPropertyValues() ? mbd.getPropertyValues() : null);
 
 		int resolvedAutowireMode = mbd.getResolvedAutowireMode();
@@ -1743,6 +1744,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 				boolean convertible = bw.isWritableProperty(propertyName) &&
 						!PropertyAccessorUtils.isNestedOrIndexedProperty(propertyName);
 				if (convertible) {
+					// 设置属性的关键步骤，所有属性都在这一步进行convert，包括自定义属性编辑的使用 -> 最后的一步操作
+					// 如果该属性没有对应的属性编辑器，则入参resolvedValue即为convertedValue
 					convertedValue = convertForProperty(resolvedValue, propertyName, bw, converter);
 				}
 				// Possibly store converted value in merged bean definition,
@@ -1780,6 +1783,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	}
 
 	/**
+	 * 转换指定目标属性的给定值
+	 *
 	 * Convert the given value for the specified target property.
 	 */
 	@Nullable

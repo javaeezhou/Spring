@@ -583,6 +583,7 @@ public abstract class AbstractNestablePropertyAccessor extends AbstractPropertyA
 
 		Assert.state(this.typeConverterDelegate != null, "No TypeConverterDelegate");
 		try {
+			// 此步骤包含自定义属性编辑器转化执行过程
 			return this.typeConverterDelegate.convertIfNecessary(propertyName, oldValue, newValue, requiredType, td);
 		}
 		catch (ConverterNotFoundException | IllegalStateException ex) {

@@ -143,6 +143,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	private final Set<PropertyEditorRegistrar> propertyEditorRegistrars = new LinkedHashSet<>(4);
 
 	/** Custom PropertyEditors to apply to the beans of this factory. */
+	// 自定义属性编辑器存放集合
 	private final Map<Class<?>, Class<? extends PropertyEditor>> customEditors = new HashMap<>(4);
 
 	/** A custom TypeConverter to use, overriding the default PropertyEditor mechanism. */

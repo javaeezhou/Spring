@@ -116,6 +116,7 @@ class TypeConverterDelegate {
 			@Nullable Class<T> requiredType, @Nullable TypeDescriptor typeDescriptor) throws IllegalArgumentException {
 
 		// Custom editor for this type?
+		// 根据该属性class类型，查找对应的属性编辑器
 		PropertyEditor editor = this.propertyEditorRegistry.findCustomEditor(requiredType, propertyName);
 
 		ConversionFailedException conversionAttemptEx = null;
@@ -152,6 +153,7 @@ class TypeConverterDelegate {
 			if (editor == null) {
 				editor = findDefaultEditor(requiredType);
 			}
+			// 此步骤包含自定义属性编辑器转化实际执行过程
 			convertedValue = doConvertValue(oldValue, convertedValue, requiredType, editor);
 		}
 
@@ -399,6 +401,7 @@ class TypeConverterDelegate {
 					logger.trace("Converting String to [" + requiredType + "] using property editor [" + editor + "]");
 				}
 				String newTextValue = (String) convertedValue;
+				// 自定义属性编辑器转化实际执行过程
 				return doConvertTextValue(oldValue, newTextValue, editor);
 			}
 			else if (String.class == requiredType) {
@@ -410,6 +413,8 @@ class TypeConverterDelegate {
 	}
 
 	/**
+	 * 将给定的文本值使用给定的属性编辑器
+	 *
 	 * Convert the given text value using the given property editor.
 	 * @param oldValue the previous value, if available (may be {@code null})
 	 * @param newTextValue the proposed text value
@@ -426,6 +431,7 @@ class TypeConverterDelegate {
 			}
 			// Swallow and proceed.
 		}
+		// 自定义属性编辑器最终步骤
 		editor.setAsText(newTextValue);
 		return editor.getValue();
 	}
