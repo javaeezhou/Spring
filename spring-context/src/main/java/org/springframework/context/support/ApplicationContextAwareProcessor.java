@@ -74,7 +74,13 @@ class ApplicationContextAwareProcessor implements BeanPostProcessor {
 		this.embeddedValueResolver = new EmbeddedValueResolver(applicationContext.getBeanFactory());
 	}
 
-
+	/**
+	 * 接口BeanPostProcessor规定的方法，会在bean创建时，实例化后，初始化前这个时机调
+	 *
+	 * @Date 15:40 2020/12/8
+	 * @Param [bean, beanName]
+	 * @return java.lang.Object
+	 **/
 	@Override
 	@Nullable
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
