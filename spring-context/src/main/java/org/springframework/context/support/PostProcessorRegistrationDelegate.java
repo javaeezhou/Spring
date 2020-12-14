@@ -75,6 +75,7 @@ final class PostProcessorRegistrationDelegate {
 			List<BeanDefinitionRegistryPostProcessor> registryProcessors = new ArrayList<>();
 
 			for (BeanFactoryPostProcessor postProcessor : beanFactoryPostProcessors) {
+				//实现了BeanDefinitionRegistryPostProcessor接口
 				if (postProcessor instanceof BeanDefinitionRegistryPostProcessor) {
 					BeanDefinitionRegistryPostProcessor registryProcessor =
 							(BeanDefinitionRegistryPostProcessor) postProcessor;
@@ -93,6 +94,7 @@ final class PostProcessorRegistrationDelegate {
 			// 用于保存本次要执行的BeanDefinitionRegistryPostProcessor
 			List<BeanDefinitionRegistryPostProcessor> currentRegistryProcessors = new ArrayList<>();
 
+			// ---------------------------------------------------------------------------------------------------------
 			// First, invoke the BeanDefinitionRegistryPostProcessors that implement PriorityOrdered.
 			// 调用所有实现PriorityOrdered接口的BeanDefinitionRegistryPostProcessor实现类
 			// 找到所有实现BeanDefinitionRegistryPostProcessor接口bean的beanName
@@ -108,7 +110,7 @@ final class PostProcessorRegistrationDelegate {
 					processedBeans.add(ppName);
 				}
 			}
-			// 按照优先级进行排序操作
+			// 按照优先级对集合中多个BeanDefinitionRegistryPostProcessor进行排序操作
 			sortPostProcessors(currentRegistryProcessors, beanFactory);
 			// 添加到registryProcessors中，用于最后执行postProcessBeanFactory方法
 			registryProcessors.addAll(currentRegistryProcessors);
@@ -116,7 +118,9 @@ final class PostProcessorRegistrationDelegate {
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
 			// 执行完毕之后，清空currentRegistryProcessors
 			currentRegistryProcessors.clear();
+			// ---------------------------------------------------------------------------------------------------------
 
+			// ---------------------------------------------------------------------------------------------------------
 			// Next, invoke the BeanDefinitionRegistryPostProcessors that implement Ordered.
 			// 调用所有实现Ordered接口的BeanDefinitionRegistryPostProcessor实现类
 			// 找到所有实现BeanDefinitionRegistryPostProcessor接口bean的beanName，
@@ -135,6 +139,7 @@ final class PostProcessorRegistrationDelegate {
 			registryProcessors.addAll(currentRegistryProcessors);
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
 			currentRegistryProcessors.clear();
+			// ---------------------------------------------------------------------------------------------------------
 
 			// Finally, invoke all other BeanDefinitionRegistryPostProcessors until no further ones appear.
 			boolean reiterate = true;
