@@ -74,6 +74,7 @@ final class PostProcessorRegistrationDelegate {
 			// 存放BeanDefinitionRegistryPostProcessor的集合
 			List<BeanDefinitionRegistryPostProcessor> registryProcessors = new ArrayList<>();
 
+			// 首先处理入参传进来的BeanFactoryPostProcessor集合
 			for (BeanFactoryPostProcessor postProcessor : beanFactoryPostProcessors) {
 				//实现了BeanDefinitionRegistryPostProcessor接口
 				if (postProcessor instanceof BeanDefinitionRegistryPostProcessor) {
@@ -94,7 +95,7 @@ final class PostProcessorRegistrationDelegate {
 			// 用于保存本次要执行的BeanDefinitionRegistryPostProcessor
 			List<BeanDefinitionRegistryPostProcessor> currentRegistryProcessors = new ArrayList<>();
 
-			// ---------------------------------------------------------------------------------------------------------
+			// ---------------------------------------实现PriorityOrdered的BDRP------------------------------------------
 			// First, invoke the BeanDefinitionRegistryPostProcessors that implement PriorityOrdered.
 			// 调用所有实现PriorityOrdered接口的BeanDefinitionRegistryPostProcessor实现类
 			// 找到所有实现BeanDefinitionRegistryPostProcessor接口bean的beanName
@@ -120,7 +121,7 @@ final class PostProcessorRegistrationDelegate {
 			currentRegistryProcessors.clear();
 			// ---------------------------------------------------------------------------------------------------------
 
-			// ---------------------------------------------------------------------------------------------------------
+			// ----------------------------------------实现Ordered的BDRP-------------------------------------------------
 			// Next, invoke the BeanDefinitionRegistryPostProcessors that implement Ordered.
 			// 调用所有实现Ordered接口的BeanDefinitionRegistryPostProcessor实现类
 			// 找到所有实现BeanDefinitionRegistryPostProcessor接口bean的beanName，
@@ -141,12 +142,14 @@ final class PostProcessorRegistrationDelegate {
 			currentRegistryProcessors.clear();
 			// ---------------------------------------------------------------------------------------------------------
 
+			// -------------------------------------------无实现的BDRP----------------------------------------------------
 			// Finally, invoke all other BeanDefinitionRegistryPostProcessors until no further ones appear.
 			boolean reiterate = true;
 			while (reiterate) {
 				reiterate = false;
 				postProcessorNames = beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false);
 				for (String ppName : postProcessorNames) {
+					// 匹配没有执行过的BFPP
 					if (!processedBeans.contains(ppName)) {
 						currentRegistryProcessors.add(beanFactory.getBean(ppName, BeanDefinitionRegistryPostProcessor.class));
 						processedBeans.add(ppName);
@@ -158,6 +161,8 @@ final class PostProcessorRegistrationDelegate {
 				invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
 				currentRegistryProcessors.clear();
 			}
+			// ---------------------------------------------------------------------------------------------------------
+
 
 			// Now, invoke the postProcessBeanFactory callback of all processors handled so far.
 			invokeBeanFactoryPostProcessors(registryProcessors, beanFactory);
