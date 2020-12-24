@@ -291,7 +291,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 			// 如果Configuration配置proxyBeanMethods代理为true则为full
 			// 如果加了@Bean、@Component、@ComponentScan、@Import、@ImportResource注解，则设置为lite
 			// 如果配置类上被@Order注解标注，则设置BeanDefinition的order属性值
-			else if (ConfigurationClassUtils.checkConfigurationClassCandidate(beanDef, this.metadataReaderFactory)) {
+			else if (ConfigurationClassUtils.checkConfigurationClassCandidate(beanDef, this.metadataReaderFactory)) { // 递归 -> checkConfigurationClassCandidate
 				// 添加到对应的集合对象中
 				configCandidates.add(new BeanDefinitionHolder(beanDef, beanName));
 			}

@@ -142,6 +142,8 @@ abstract class ConfigurationClassUtils {
 	}
 
 	/**
+	 * 检查给定的元数据，以查找给定的候选配置类是否被指定的注解标注
+	 *
 	 * Check the given metadata for a configuration class candidate
 	 * (or nested component class declared within a configuration/component class).
 	 * @param metadata the metadata of the annotated class
@@ -150,11 +152,13 @@ abstract class ConfigurationClassUtils {
 	 */
 	public static boolean isConfigurationCandidate(AnnotationMetadata metadata) {
 		// Do not consider an interface or an annotation...
+		// 不考虑接口或注解
 		if (metadata.isInterface()) {
 			return false;
 		}
 
 		// Any of the typical annotations found?
+		// 检查是否被注解@Component、@ComponentScan、@Import、@ImportResource标注
 		for (String indicator : candidateIndicators) {
 			if (metadata.isAnnotated(indicator)) {
 				return true;
@@ -162,6 +166,7 @@ abstract class ConfigurationClassUtils {
 		}
 
 		// Finally, let's look for @Bean methods...
+		// 最后检查是否有@Bean标注的方法
 		try {
 			return metadata.hasAnnotatedMethods(Bean.class.getName());
 		}
