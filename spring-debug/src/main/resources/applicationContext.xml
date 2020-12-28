@@ -5,10 +5,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:component-scan base-package="cn.bt.entity"></context:component-scan>
+	<!--测试@Bean和@Condition-->
+	<context:component-scan base-package="cn.bt.shouldSkip"></context:component-scan>
 <!--	<cont0ext:property-placeholder location="classpath:db.properties" ></context:property-placeholder>-->
 	<!--自定义BDRPP-->
-	<bean class="cn.bt.selfbdrpp.MyBeanDefinitionRegistryPostProcessor"></bean>
+<!--	<bean class="cn.bt.selfbdrpp.MyBeanDefinitionRegistryPostProcessor"></bean>-->
 
     <bean id="a"  class="cn.bt.entity.A" >
 
