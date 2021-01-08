@@ -93,7 +93,7 @@ public class ComponentScanBeanDefinitionParser implements BeanDefinitionParser {
 		ClassPathBeanDefinitionScanner scanner = configureScanner(parserContext, element);
 		// 使用scanner在执行的basePackages包中执行扫描，返回已注册的bean定义
 		Set<BeanDefinitionHolder> beanDefinitions = scanner.doScan(basePackages);
-		// 组件注册（包括注册一些内部的注解后置处理器，触发注册事件）
+		// 组件注册（包括注册一些内部的注解后置处理器，触发注册事件） --> internal
 		registerComponents(parserContext.getReaderContext(), beanDefinitions, element);
 
 		return null;
@@ -149,6 +149,10 @@ public class ComponentScanBeanDefinitionParser implements BeanDefinitionParser {
 
 		Object source = readerContext.extractSource(element);
 		// 使用注解的tagName和source构建CompositeComponentDefinition
+		// 一个组件集合，里面包含了多个组件，以标签名（包含了名称空间）作为名称，比如aop:config
+		// 里面包含的多个组件就是aop:config的子标签，包含对标签属性的描述
+		// 比如xml中pointcut子标签就是一个组件，advisor子标签也是一个组件
+		// 这个组件记录了子标签的name属性或者expression属性，根据不同子标签，属性不一样
 		CompositeComponentDefinition compositeDef = new CompositeComponentDefinition(element.getTagName(), source);
 
 		// 将扫描到的所有beanDefinition添加到compositeDef的nestedComponents属性中
