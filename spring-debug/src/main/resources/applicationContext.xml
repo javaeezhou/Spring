@@ -11,9 +11,9 @@
 	<!--自定义BDRPP-->
 <!--	<bean class="cn.bt.selfbdrpp.MyBeanDefinitionRegistryPostProcessor"></bean>-->
 
-    <bean id="a"  class="cn.bt.entity.A" >
+    <!--<bean id="a"  class="cn.bt.entity.A" >
 
 		<constructor-arg value="你在赣神魔"/>
-	</bean>
+	</bean>-->
 
 </beans>
