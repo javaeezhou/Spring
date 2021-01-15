@@ -84,6 +84,7 @@ public abstract class AbstractApplicationEventMulticaster
 		if (!(beanFactory instanceof ConfigurableBeanFactory)) {
 			throw new IllegalStateException("Not running in a ConfigurableBeanFactory: " + beanFactory);
 		}
+		// bean工厂赋值到该对象属性
 		this.beanFactory = (ConfigurableBeanFactory) beanFactory;
 		if (this.beanClassLoader == null) {
 			this.beanClassLoader = this.beanFactory.getBeanClassLoader();
@@ -98,17 +99,25 @@ public abstract class AbstractApplicationEventMulticaster
 		return this.beanFactory;
 	}
 
-
+	/**
+	 * 添加应用程序监听器类
+	 * @param listener the listener to add
+	 */
 	@Override
 	public void addApplicationListener(ApplicationListener<?> listener) {
+		// 锁定监听器助手对象
 		synchronized (this.defaultRetriever) {
 			// Explicitly remove target for a proxy, if registered already,
 			// in order to avoid double invocations of the same listener.
+			// 如果已经注册，则显式删除已经注册的监听器对象，为了避免调用重复的监听器对象
 			Object singletonTarget = AopProxyUtils.getSingletonTarget(listener);
 			if (singletonTarget instanceof ApplicationListener) {
+				// 删除监听器对象
 				this.defaultRetriever.applicationListeners.remove(singletonTarget);
 			}
+			// 新增监听器对象
 			this.defaultRetriever.applicationListeners.add(listener);
+			// 清空监听器助手缓存map
 			this.retrieverCache.clear();
 		}
 	}
@@ -468,18 +477,25 @@ public abstract class AbstractApplicationEventMulticaster
 	 */
 	private class DefaultListenerRetriever {
 
+		// 存放应用程序事件监听器
 		public final Set<ApplicationListener<?>> applicationListeners = new LinkedHashSet<>();
 
+		// 存放应用程序事件监听器bean名称
 		public final Set<String> applicationListenerBeans = new LinkedHashSet<>();
 
+		// 获取应用程序的事件监听器
 		public Collection<ApplicationListener<?>> getApplicationListeners() {
+			// 创建一个指定大小的ApplicationListener监听器list集合
 			List<ApplicationListener<?>> allListeners = new ArrayList<>(
 					this.applicationListeners.size() + this.applicationListenerBeans.size());
 			allListeners.addAll(this.applicationListeners);
+			// 如果存放监听器bean name集合不为空
 			if (!this.applicationListenerBeans.isEmpty()) {
+				// 获取ioc容器工厂类
 				BeanFactory beanFactory = getBeanFactory();
 				for (String listenerBeanName : this.applicationListenerBeans) {
 					try {
+						// 获取指定bean name的监听器实例
 						ApplicationListener<?> listener =
 								beanFactory.getBean(listenerBeanName, ApplicationListener.class);
 						if (!allListeners.contains(listener)) {
