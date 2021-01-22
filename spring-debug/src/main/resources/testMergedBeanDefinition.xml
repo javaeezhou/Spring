@@ -5,8 +5,9 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="car" class="cn.bt.factoryBean.CarFactoryBean">
-		<property name="carInfo" value="AE86,丰田,100"></property>
-	</bean>
 
+	<bean id="student" class="cn.bt.entity.Student" parent="conversionService">
+
+	</bean>
+	<bean id="conversionService" class="org.springframework.core.convert.support.StringToBooleanConverter"></bean>
 </beans>

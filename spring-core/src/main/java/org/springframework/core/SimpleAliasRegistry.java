@@ -185,6 +185,8 @@ public class SimpleAliasRegistry implements AliasRegistry {
 	}
 
 	/**
+	 * 进行名字的规范化，其实就是获取原始名字，如果是别名就从映射中取原始名
+	 *
 	 * Check whether the given name points back to the given alias as an alias
 	 * in the other direction already, catching a circular reference upfront
 	 * and throwing a corresponding IllegalStateException.
@@ -202,6 +204,8 @@ public class SimpleAliasRegistry implements AliasRegistry {
 	}
 
 	/**
+	 * 确定原始的名字，处理别名到原始的名字
+	 *
 	 * Determine the raw name, resolving aliases to canonical names.
 	 * @param name the user-specified name
 	 * @return the transformed name
@@ -211,6 +215,7 @@ public class SimpleAliasRegistry implements AliasRegistry {
 		// Handle aliasing...
 		String resolvedName;
 		do {
+			// 将别名解析成真正的beanName
 			resolvedName = this.aliasMap.get(canonicalName);
 			if (resolvedName != null) {
 				canonicalName = resolvedName;

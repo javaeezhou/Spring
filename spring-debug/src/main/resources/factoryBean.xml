@@ -5,8 +5,6 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="car" class="cn.bt.factoryBean.CarFactoryBean">
-		<property name="carInfo" value="AE86,丰田,100"></property>
-	</bean>
+	<bean id="myFactoryBean" class="cn.bt.factoryBean.MyFactoryBean"></bean>
 
 </beans>

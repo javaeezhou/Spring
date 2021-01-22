@@ -1,4 +1,4 @@
-package cn.bt.factorybean;
+package cn.bt.factoryBean;
 
 import cn.bt.entity.Car;
 import org.springframework.beans.factory.FactoryBean;

@@ -210,18 +210,31 @@ public abstract class PlaceholderConfigurerSupport extends PropertyResourceConfi
 	}
 
 
+	/**
+	 * 使用指定的字符串值解析器处理从起中所有的bean定义属性
+	 *
+	 * @param beanFactoryToProcess 要处理的bean定义所属的容器
+	 * @param valueResolver 属性值解析器
+	 */
 	protected void doProcessProperties(ConfigurableListableBeanFactory beanFactoryToProcess,
-			StringValueResolver valueResolver) {
-
+									   StringValueResolver valueResolver) {
+		// 使用指定的字符串值解析器 valueResolver 定义一个bean定义访问器，
+		// 该访问器的目的就是每次访问一个bean定义，将其中所有可能包含占位符的属性值，包括bean属性值，
+		// bean构造函数参数值,双亲bean名称，bean类名，bean工厂bean名称，bean工厂方法名称，作用域
+		// 等都遍历一遍，进行需要的占位符解析
 		BeanDefinitionVisitor visitor = new BeanDefinitionVisitor(valueResolver);
 
+		// 获取容器中所有bean的名称
 		String[] beanNames = beanFactoryToProcess.getBeanDefinitionNames();
+		// 遍历bean定义进行属性值占位符解析
 		for (String curName : beanNames) {
 			// Check that we're not parsing our own bean definition,
 			// to avoid failing on unresolvable placeholders in properties file locations.
+			// 检查当前bean的名称不等于被处理的bean的名称并且要处理的容器是自己所在的容器
 			if (!(curName.equals(this.beanName) && beanFactoryToProcess.equals(this.beanFactory))) {
 				BeanDefinition bd = beanFactoryToProcess.getBeanDefinition(curName);
 				try {
+					// 对bean定义bd进行属性值占位符解析
 					visitor.visitBeanDefinition(bd);
 				}
 				catch (Exception ex) {
@@ -231,9 +244,11 @@ public abstract class PlaceholderConfigurerSupport extends PropertyResourceConfi
 		}
 
 		// New in Spring 2.5: resolve placeholders in alias target names and aliases as well.
+		// 处理别名中的占位符
 		beanFactoryToProcess.resolveAliases(valueResolver);
 
 		// New in Spring 3.0: resolve placeholders in embedded values such as annotation attributes.
+		// 设置占位符处理器为内置的值处理器
 		beanFactoryToProcess.addEmbeddedValueResolver(valueResolver);
 	}
 
