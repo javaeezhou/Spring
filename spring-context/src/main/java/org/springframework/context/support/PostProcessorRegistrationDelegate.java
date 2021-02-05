@@ -337,7 +337,7 @@ final class PostProcessorRegistrationDelegate {
 
 		// Re-register post-processor for detecting inner beans as ApplicationListeners,
 		// moving it to the end of the processor chain (for picking up proxies etc).
-		// 注册ApplicationListenerDetector到beanFactory中
+		// 注册ApplicationListenerDetector到beanFactory中 -> 在prepareBeanFactory方法中也有注册这个bpp，重复注册是为把它放在集合最后面
 		beanFactory.addBeanPostProcessor(new ApplicationListenerDetector(applicationContext));
 	}
 
