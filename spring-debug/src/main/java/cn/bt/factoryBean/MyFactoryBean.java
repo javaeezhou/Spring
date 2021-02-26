@@ -10,7 +10,7 @@ import org.springframework.beans.factory.FactoryBean;
 public class MyFactoryBean implements FactoryBean {
 	@Override
 	public boolean isSingleton() {
-		return false;
+		return true;
 	}
 
 	@Override

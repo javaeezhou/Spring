@@ -3,6 +3,7 @@ package cn.bt.app;
 import cn.bt.entity.A;
 import cn.bt.entity.Car;
 import cn.bt.entity.Student;
+import cn.bt.factoryBean.MyFactoryBean;
 import cn.bt.test.MyClassPathXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -22,9 +23,15 @@ public class App {
 //		System.out.println(car);
 
 		// -----------------------------------------factoryBean----------------------------------------
-		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("factoryBean.xml");
+//		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("factoryBean.xml");
 //		Student student = (Student) ac.getBean("&myFactoryBean");
 //		System.out.println(student);
-		System.out.println(ac.getBean("&myFactoryBean"));
+//		System.out.println(ac.getBean("&myFactoryBean"));
+
+		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("factoryBean.xml");
+		MyFactoryBean myFactoryBean = (MyFactoryBean) ac.getBean("&myFactoryBean");
+		Student student = (Student) ac.getBean("myFactoryBean");
+		System.out.println(myFactoryBean);//print MyFactoryBean@255316f2
+		System.out.println(student);//print Student{name='韩金轮', age=32}
 	}
 }
