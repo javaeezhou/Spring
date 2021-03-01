@@ -101,6 +101,7 @@ public final class BeanDefinitionBuilder {
 	 * Create a new {@code BeanDefinitionBuilder} used to construct a {@link RootBeanDefinition}.
 	 * @param beanClass the {@code Class} of the bean that the definition is being created for
 	 */
+	// 创建新的beanDefinition
 	public static BeanDefinitionBuilder rootBeanDefinition(Class<?> beanClass) {
 		return rootBeanDefinition(beanClass, null);
 	}
