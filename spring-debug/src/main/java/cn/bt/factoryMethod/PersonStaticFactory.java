@@ -9,7 +9,7 @@ public class PersonStaticFactory {
         return person;
     }
 
-    public static Person getPerson(int age){
+    /*public static Person getPerson(int age){
         return new Person();
     }
 
@@ -18,5 +18,5 @@ public class PersonStaticFactory {
         person.setId(1);
         person.setName(name);
         return person;
-    }
+    }*/
 }
