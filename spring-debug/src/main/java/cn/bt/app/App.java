@@ -41,5 +41,10 @@ public class App {
         Person bean = ac.getBean(Person.class);
         Person bean2 = ac.getBean(Person.class);
 
+		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("factoryBean.xml");
+		MyFactoryBean myFactoryBean = (MyFactoryBean) ac.getBean("&myFactoryBean");
+		Student student = (Student) ac.getBean("myFactoryBean");
+		System.out.println(myFactoryBean);
+		System.out.println(student);
 	}
 }

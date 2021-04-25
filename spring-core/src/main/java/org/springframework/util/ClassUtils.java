@@ -281,7 +281,7 @@ public abstract class ClassUtils {
 			clToUse = getDefaultClassLoader();
 		}
 		try {
-			return Class.forName(name, false, clToUse);
+			return Class.forName(name, false, clToUse); // -> 核心步骤
 		}
 		catch (ClassNotFoundException ex) {
 			int lastDotIndex = name.lastIndexOf(PACKAGE_SEPARATOR);

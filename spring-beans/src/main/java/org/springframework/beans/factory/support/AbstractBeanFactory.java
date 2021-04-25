@@ -350,7 +350,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 							throw ex;
 						}
 					});
-					bean = getObjectForBeanInstance(sharedInstance, name, beanName, mbd);
+					bean = getObjectForBeanInstance(sharedInstance, name, beanName, mbd);// 跟上面的getObjectForBeanInstance方法不同，这里的入参mbd不为空，目的是为了后续代码标记该bean是factoryBean类型，详情可继续点后面代码
 				}
 
 				// 原型模式的bean对象创建
@@ -1555,6 +1555,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 						() -> doResolveBeanClass(mbd, typesToMatch), getAccessControlContext());
 			}
 			else {
+				// 进行详细的解析过程 核心 -> 解析返回当前bean对应的Class对象
 				return doResolveBeanClass(mbd, typesToMatch);
 			}
 		}
