@@ -1262,7 +1262,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		Constructor<?>[] ctors = determineConstructorsFromBeanPostProcessors(beanClass, beanName);
 		// 以下情况符合其一即可进入
 		// 1、存在可选构造方法
-		// 2、自动装配模型为构造函数自动装配
+		// 2、自动装配模型为构造函数自动装配  自动装配模式：1、byName 2.byType 3.constructor 4.default 5.no
 		// 3、给BeanDefinition中设置了构造参数值
 		// 4、有参与构造函数参数列表的参数
 		if (ctors != null || mbd.getResolvedAutowireMode() == AUTOWIRE_CONSTRUCTOR ||

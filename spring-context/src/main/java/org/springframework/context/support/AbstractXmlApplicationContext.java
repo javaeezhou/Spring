@@ -95,7 +95,7 @@ public abstract class AbstractXmlApplicationContext extends AbstractRefreshableC
 		 * 结构信息在xsd或者dtd中放置的 路径spring.schemas
 		 * 可以理解为读取本地文件库
 		 */
-		beanDefinitionReader.setEntityResolver(new ResourceEntityResolver(this));
+ 		beanDefinitionReader.setEntityResolver(new ResourceEntityResolver(this));
 
 		// Allow a subclass to provide custom initialization of the reader,
 		// then proceed with actually loading the bean definitions.
