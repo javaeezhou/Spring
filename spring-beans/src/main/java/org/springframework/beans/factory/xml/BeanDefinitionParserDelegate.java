@@ -1418,6 +1418,7 @@ public class BeanDefinitionParserDelegate {
 		if (namespaceUri == null) {
 			return null;
 		}
+		// 根据命名空间找到对应的命名空间处理器NamespaceHandler 类比ResourceEntityResolver
 		// 从上下文中根据命名空间找到对应的命名空间处理器NamespaceHandler
 		NamespaceHandler handler = this.readerContext.getNamespaceHandlerResolver().resolve(namespaceUri);
 		if (handler == null) {
@@ -1522,6 +1523,8 @@ public class BeanDefinitionParserDelegate {
 
 
 	/**
+	 * 获取节点的命名空间
+	 *
 	 * Get the namespace URI for the supplied node.
 	 * <p>The default implementation uses {@link Node#getNamespaceURI}.
 	 * Subclasses may override the default implementation to provide a

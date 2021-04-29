@@ -59,7 +59,14 @@ public class DelegatingEntityResolver implements EntityResolver {
 	 * (can be {@code null}) to use the default ClassLoader)
 	 */
 	public DelegatingEntityResolver(@Nullable ClassLoader classLoader) {
-		// 解析dtd和xsd 注意new PluggableSchemaResolver在进行debug的时候有小细节 -> idea 会自动执行toString()
+		// 解析dtd和xsd 注意new PluggableSchemaResolver在进行debug的时候有小细节 -> idea会自动打印toString()
+		// http://www.myexceptions.net/software-architecture-design/2091450.html
+		// dtd基本已被淘汰，现在spring的验证模式基本都是采用xsd文件作为xml文档的验证模式，
+		// 通过xsd文件可以检查该xml是否符合规范，是否有效。在使用xsd文件对xml文档进行校验的时候，
+		// （xmlns="http://www.springframework.org/schema/beans"）还必须指定该名称空间所对应的xsd文档的存贮位置，
+		// 通过schemaLocation属性来指定名称空间所对应的xsd文档的存储位置，它包含两部分，一部分是名称空间的URI，
+		// 另一部分是该名称空间所标识的xsd文件位置或URL地址（xsi:schemaLocation="
+		//  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd“）。
 		this.dtdResolver = new BeansDtdResolver();
 		this.schemaResolver = new PluggableSchemaResolver(classLoader);
 	}

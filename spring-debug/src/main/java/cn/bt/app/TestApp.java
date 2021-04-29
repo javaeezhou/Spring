@@ -24,3 +24,4 @@ public class TestApp {
 		System.out.println(student);
 	}
 }
+

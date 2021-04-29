@@ -102,6 +102,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	/** Constants instance for this class. */
 	private static final Constants constants = new Constants(XmlBeanDefinitionReader.class);
 
+	// xml验证模式（使用哪种模式来解析xml，默认是1）
 	private int validationMode = VALIDATION_AUTO;
 
 	private boolean namespaceAware = false;
@@ -435,6 +436,8 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	}
 
 	/**
+	 * 获取xml验证模式（使用哪种模式来解析xml），默认xsd
+	 *
 	 * Determine the validation mode for the specified {@link Resource}.
 	 * If no explicit validation mode has been configured, then the validation
 	 * mode gets {@link #detectValidationMode detected} from the given resource.
@@ -447,6 +450,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 		if (validationModeToUse != VALIDATION_AUTO) {
 			return validationModeToUse;
 		}
+		// 如果标签内容包括“DOCTYPE”字段则返回dtd解析方式，否则xsd
 		int detectedMode = detectValidationMode(resource);
 		if (detectedMode != VALIDATION_AUTO) {
 			return detectedMode;
@@ -458,6 +462,8 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	}
 
 	/**
+	 * 判断使用哪种xml解析方式，如果标签内容中有DOCTYPE定义则返回dtd解析方式
+	 *
 	 * Detect which kind of validation to perform on the XML file identified
 	 * by the supplied {@link Resource}. If the file has a {@code DOCTYPE}
 	 * definition then DTD validation is used otherwise XSD validation is assumed.
@@ -507,11 +513,12 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 * @see BeanDefinitionDocumentReader#registerBeanDefinitions
 	 */
 	public int registerBeanDefinitions(Document doc, Resource resource) throws BeanDefinitionStoreException {
-		// 对xml的beanDefinition进行解析
+		// 对xml的beanDefinition进行解析 创建一个专门解析Document的对象
 		BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader();
+		// 获取bean工厂中benaDefinition的数量
 		int countBefore = getRegistry().getBeanDefinitionCount();
 		// 完成具体的解析过程
-		documentReader.registerBeanDefinitions(doc, createReaderContext(resource));//<- 封装命名空间解析器
+		documentReader.registerBeanDefinitions(doc, createReaderContext(resource));//<- 封装命名空间解析器 DefaultNamespaceHandlerResolver META-INF/spring.handlers
 		return getRegistry().getBeanDefinitionCount() - countBefore;
 	}
 

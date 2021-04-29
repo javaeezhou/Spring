@@ -39,7 +39,7 @@ public class App {
 
 		ApplicationContext ac = new ClassPathXmlApplicationContext("person.xml");
         Person bean = ac.getBean(Person.class);
-//        Person bean2 = ac.getBean(Person.class);
+        Person bean2 = ac.getBean(Person.class);
 
 //		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("factoryBean.xml");
 //		MyFactoryBean myFactoryBean = (MyFactoryBean) ac.getBean("&myFactoryBean");
