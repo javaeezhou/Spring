@@ -15,7 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class App {
 	public static void main(String[] args) {
-//		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 //		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("test.xml");
 //		MyClassPathXmlApplicationContext mac = new MyClassPathXmlApplicationContext("applicationContext.xml");
 //		A a = (A) ac.getBean("a");
@@ -37,9 +37,9 @@ public class App {
 //		System.out.println(student);//print Student{name='韩金轮', age=32}
 
 
-		ApplicationContext ac = new ClassPathXmlApplicationContext("person.xml");
-        Person bean = ac.getBean(Person.class);
-        Person bean2 = ac.getBean(Person.class);
+//		ApplicationContext ac = new ClassPathXmlApplicationContext("person.xml");
+//        Person bean = ac.getBean(Person.class);
+//        Person bean2 = ac.getBean(Person.class);
 
 //		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("factoryBean.xml");
 //		MyFactoryBean myFactoryBean = (MyFactoryBean) ac.getBean("&myFactoryBean");

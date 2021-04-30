@@ -4,8 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
-@Conditional({WindowsCondition.class})
-@Configuration
+//@Conditional({WindowsCondition.class})
+//@Configuration
 public class BeanConfig {
     @Bean(name = "bill")
     public Person person1(){

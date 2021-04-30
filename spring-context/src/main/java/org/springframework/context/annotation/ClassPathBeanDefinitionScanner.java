@@ -274,7 +274,7 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
 		Set<BeanDefinitionHolder> beanDefinitions = new LinkedHashSet<>();
 		// 遍历basePackages
 		for (String basePackage : basePackages) {
-			// 扫描basePackage,将符合要求的bean定义全部找出来
+			// 扫描basePackage,将符合要求（******是否被注解标注******）的bean定义全部找出来
 			Set<BeanDefinition> candidates = findCandidateComponents(basePackage);
 			// 遍历所有候选的bean定义
 			for (BeanDefinition candidate : candidates) {

@@ -82,7 +82,7 @@ public class ComponentScanBeanDefinitionParser implements BeanDefinitionParser {
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
 		// 获取<context:component-scan>节点的base-package属性值
 		String basePackage = element.getAttribute(BASE_PACKAGE_ATTRIBUTE);
-		// 解析占位符
+		// 解析占位符 -> 查看当前需要解析的字符串中是否包含占位符，如果包含则匹配替换成系统环境变量中相应的值
 		basePackage = parserContext.getReaderContext().getEnvironment().resolvePlaceholders(basePackage);
 		// 解析base-package(允许通过,;\t\n中的任一符号填写多个)
 		String[] basePackages = StringUtils.tokenizeToStringArray(basePackage,

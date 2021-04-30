@@ -562,6 +562,7 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 		return this.propertyResolver.getRequiredProperty(key, targetType);
 	}
 
+	// 解析占位符 -> 查看当前需要解析的字符串中是否包含占位符，如果包含则匹配替换成系统环境变量中相应的值
 	@Override
 	public String resolvePlaceholders(String text) {
 		return this.propertyResolver.resolvePlaceholders(text);
