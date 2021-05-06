@@ -7,6 +7,9 @@ package cn.bt.entity;
 public class A {
 	private String name;
 
+	public A() {
+	}
+
 	public A(String name) {
 		this.name = name;
 	}
