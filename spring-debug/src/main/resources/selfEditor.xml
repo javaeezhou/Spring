@@ -9,22 +9,22 @@
     </bean>
 
 	<!--第一种方式-->
-    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
-        <property name="propertyEditorRegistrars">
-            <list>
-                <bean class="cn.bt.selfEditor.AddressPropertyEditorRegistrar"></bean>
-            </list>
-        </property>
-    </bean>
-
-	<!--第二种方式-->
 <!--    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">-->
-<!--        <property name="customEditors">-->
-<!--            <map>-->
-<!--                <entry key="cn.bt.selfEditor.Address">-->
-<!--                    <value>cn.bt.selfEditor.AddressPropertyEditor</value>-->
-<!--                </entry>-->
-<!--            </map>-->
+<!--        <property name="propertyEditorRegistrars">-->
+<!--            <list>-->
+<!--                <bean class="cn.bt.selfEditor.AddressPropertyEditorRegistrar"></bean>-->
+<!--            </list>-->
 <!--        </property>-->
 <!--    </bean>-->
+
+<!--	第二种方式-->
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+                <entry key="cn.bt.selfEditor.Address">
+                    <value>cn.bt.selfEditor.AddressPropertyEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
 </beans>

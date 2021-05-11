@@ -1315,7 +1315,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				}
 			}
 		}
-		if (!this.customEditors.isEmpty()) {
+		if (!this.customEditors.isEmpty()) { // 将属性编辑器放入bw中
 			this.customEditors.forEach((requiredType, editorClass) ->
 					registry.registerCustomEditor(requiredType, BeanUtils.instantiateClass(editorClass)));
 		}
