@@ -5,7 +5,7 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 	<context:component-scan base-package="cn.bt.testMergedBeanDefinitionPostProcessor"></context:component-scan>
 
-	<bean id="person" class="cn.bt.testMergedBeanDefinitionPostProcessor.Merged_Person">
+<!--	<bean id="person" class="cn.bt.testMergedBeanDefinitionPostProcessor.Merged_Person">-->
 
-	</bean>
+<!--	</bean>-->
 </beans>

@@ -588,6 +588,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// 没有就创建实例
 		if (instanceWrapper == null) {
 			// 根据执行bean使用对应的策略创建新的实例，如，工厂方法，构造函数主动注入、简单初始化
+			// -----------> 此步完成bean的实例化工作
 			instanceWrapper = createBeanInstance(beanName, mbd, args);
 		}
 		Object bean = instanceWrapper.getWrappedInstance();
@@ -598,6 +599,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		// Allow post-processors to modify the merged bean definition.
 		// 允许BeanPostProcessor去修改合并的beanDefinition
+		// ------->此步完成相关注解的扫描处理工作，为了后面被注解的属性注入的时候，能取到对应的信息
 		synchronized (mbd.postProcessingLock) {
 			if (!mbd.postProcessed) {
 				try {
