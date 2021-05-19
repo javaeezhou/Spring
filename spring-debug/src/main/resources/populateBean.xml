@@ -12,5 +12,5 @@
         <property name="town" value="黄州"></property>
     </bean>
 
-    <context:component-scan base-package="cn.bt.populateBean.annotation"></context:component-scan>
+<!--    <context:component-scan base-package="cn.bt.populateBean.annotation"></context:component-scan>-->
 </beans>

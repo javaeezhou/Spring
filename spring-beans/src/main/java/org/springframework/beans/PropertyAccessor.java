@@ -72,6 +72,8 @@ public interface PropertyAccessor {
 
 
 	/**
+	 * 确定指定的属性是否可读
+	 *
 	 * Determine whether the specified property is readable.
 	 * <p>Returns {@code false} if the property doesn't exist.
 	 * @param propertyName the property to check

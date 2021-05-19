@@ -1501,7 +1501,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		//如果mdb有PropertyValues就获取其PropertyValues
 		PropertyValues pvs = (mbd.hasPropertyValues() ? mbd.getPropertyValues() : null);
 
-		// 获取 mbd 的 自动装配模式
+		// 获取 mbd 的 自动装配模式 0 -> no, 1 -> byName, 2 -> byType, 3 -> constructor
 		int resolvedAutowireMode = mbd.getResolvedAutowireMode();
 		// 如果 自动装配模式 为 按名称自动装配bean属性 或者 按类型自动装配bean属性
 		if (resolvedAutowireMode == AUTOWIRE_BY_NAME || resolvedAutowireMode == AUTOWIRE_BY_TYPE) {
@@ -1661,13 +1661,13 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		//遍历属性名数组
 		for (String propertyName : propertyNames) {
 			try {
-				//PropertyDescriptor:表示JavaBean类通过存储器导出一个属性
+				//PropertyDescriptor:表示JavaBean类通过存储器导出一个属性 -> 用来描述属性（它在jdk的包里面）
 				//从bw中获取propertyName对应的PropertyDescriptor
 				PropertyDescriptor pd = bw.getPropertyDescriptor(propertyName);
 				// Don't try autowiring by type for type Object: never makes sense,
 				// even if it technically is a unsatisfied, non-simple property.
 				// 不要尝试按类型自动装配对象：永远是有意义的，即使它在技术上是一个不满意，复杂属性
-				//如果pd的属性值类型不是 Object
+				//如果pd的属性值类型不是 Object --> 如果是Object就没有必要去匹配，因为它是祖宗类
 				if (Object.class != pd.getPropertyType()) {
 					//获取pd属性的Setter方法的方法参数包装对象
 					MethodParameter methodParam = BeanUtils.getWriteMethodParameter(pd);
