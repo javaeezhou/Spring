@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
  * @create 2021-05-20 19:23
  */
 @Service
-public class PersonService {
+public class ZhouService {
 
-	@Zhou_Autowired
-	private PersonDao personDao;
+	public void show(){
+		System.out.println("卢本伟牛逼！");
+	}
 }

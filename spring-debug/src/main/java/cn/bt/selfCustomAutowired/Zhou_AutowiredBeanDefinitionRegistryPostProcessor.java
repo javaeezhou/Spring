@@ -10,12 +10,11 @@ import org.springframework.core.PriorityOrdered;
 import org.springframework.stereotype.Component;
 
 /**
- * 自定义一个BDRPP --> 来注册处理自定义注解@Zhou_Autowired的BPP
+ * 第二种多此一举的方法：自定义一个BDRPP --> 来注册处理自定义注解@Zhou_Autowired的BPP
  *
  * @author zhouqian
  * @create 2021-05-20 17:31
  */
-@Component
 public class Zhou_AutowiredBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor, PriorityOrdered {
 
 	// 使用BDRPP来注册处理自定义注解@Zhou_Autowired的BPP
