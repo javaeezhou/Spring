@@ -95,7 +95,7 @@ final class PostProcessorRegistrationDelegate {
 			// 用于保存本次要执行的BeanDefinitionRegistryPostProcessor
 			List<BeanDefinitionRegistryPostProcessor> currentRegistryProcessors = new ArrayList<>();
 
-			// ---------------------------------------实现PriorityOrdered的BDRP------------------------------------------
+			// ---------------------------------------实现PriorityOrdered的BDRPP-----------------------------------------
 			// First, invoke the BeanDefinitionRegistryPostProcessors that implement PriorityOrdered.
 			// 调用所有实现PriorityOrdered接口的BeanDefinitionRegistryPostProcessor实现类
 			// 找到所有实现BeanDefinitionRegistryPostProcessor接口bean的beanName
@@ -121,7 +121,7 @@ final class PostProcessorRegistrationDelegate {
 			currentRegistryProcessors.clear();
 			// ---------------------------------------------------------------------------------------------------------
 
-			// ----------------------------------------实现Ordered的BDRP-------------------------------------------------
+			// ----------------------------------------实现Ordered的BDRPP------------------------------------------------
 			// Next, invoke the BeanDefinitionRegistryPostProcessors that implement Ordered.
 			// 调用所有实现Ordered接口的BeanDefinitionRegistryPostProcessor实现类
 			// 找到所有实现BeanDefinitionRegistryPostProcessor接口bean的beanName，
@@ -142,7 +142,7 @@ final class PostProcessorRegistrationDelegate {
 			currentRegistryProcessors.clear();
 			// ---------------------------------------------------------------------------------------------------------
 
-			// -------------------------------------------无实现的BDRP----------------------------------------------------
+			// -------------------------------------------无实现的BDRPP--------------------------------------------------
 			// Finally, invoke all other BeanDefinitionRegistryPostProcessors until no further ones appear.
 			boolean reiterate = true;
 			while (reiterate) {
