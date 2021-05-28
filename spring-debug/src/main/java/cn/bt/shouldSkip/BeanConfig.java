@@ -4,12 +4,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
-//@Conditional({WindowsCondition.class})
-//@Configuration
+@Conditional({WindowsCondition.class})
+@Configuration
 public class BeanConfig {
-    @Bean(name = "bill")
+    @Bean(name = "lbwnb")
     public Person person1(){
-        return new Person("Bill Gates",62);
+        return new Person("lbw",20);
     }
     @Conditional({LinuxCondition.class})
     @Bean("linus")

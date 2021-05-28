@@ -1551,6 +1551,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 					//如果pvs为null
 					if (pvsToUse == null) {
 						//如果filteredPds为null
+
 						if (filteredPds == null) {
 							//mbd.allowCaching:是否允许缓存，默认时允许的。缓存除了可以提高效率以外，还可以保证在并发的情况下，返回的PropertyDesciptor[]永远都是同一份
 							//从bw提取一组经过筛选的PropertyDesciptor,排除忽略的依赖项或忽略项上的定义的属性
@@ -1893,7 +1894,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		BeanDefinitionValueResolver valueResolver = new BeanDefinitionValueResolver(this, beanName, mbd, converter);
 
 		// Create a deep copy, resolving any references for values.
-		// 创建一个深拷贝，解析任何值引用
+		// 创建一个深拷贝，解析任何值引用 --> 为了保证原beanDefinition的纯净，不受影响，愈深拷贝出来的对象相互独立
 		List<PropertyValue> deepCopy = new ArrayList<>(original.size());
 		//是否还需要解析标记
 		boolean resolveNecessary = false;
