@@ -1,11 +1,14 @@
 package cn.bt.shouldSkip;
 
+import cn.bt.entity.Student;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 @Conditional({WindowsCondition.class})
 @Configuration
+@Import(Student.class)
 public class BeanConfig {
     @Bean(name = "lbwnb")
     public Person person1(){

@@ -683,27 +683,41 @@ public class AutowiredAnnotationBeanPostProcessor extends InstantiationAwareBean
 		protected void inject(Object bean, @Nullable String beanName, @Nullable PropertyValues pvs) throws Throwable {
 			Field field = (Field) this.member;
 			Object value;
+			// 如果缓存，从缓存中获取
 			if (this.cached) {
+				// 如果  cachedFieldValue instanceof DependencyDescriptor。则调用 resolveDependency 方法重新加载。
 				value = resolvedCachedArgument(beanName, this.cachedFieldValue);
 			}
 			else {
+				// 否则调用了 resolveDependency 方法。这个在前篇讲过，在 populateBean 方法中按照类型注入的时候就是通过此方法，
+				// 也就是说明了 @Autowired 和 @Inject默认是 按照类型注入的
 				DependencyDescriptor desc = new DependencyDescriptor(field, this.required);
 				desc.setContainingClass(bean.getClass());
 				Set<String> autowiredBeanNames = new LinkedHashSet<>(1);
 				Assert.state(beanFactory != null, "No BeanFactory available");
+				// 转换器使用的bean工厂的转换器
 				TypeConverter typeConverter = beanFactory.getTypeConverter();
 				try {
+					// 获取依赖的value值的工作  最终还是委托给beanFactory.resolveDependency()去完成的
+					// 这个接口方法由AutowireCapableBeanFactory提供，它提供了从bean工厂里获取依赖值的能力
 					value = beanFactory.resolveDependency(desc, beanName, autowiredBeanNames, typeConverter);
 				}
 				catch (BeansException ex) {
 					throw new UnsatisfiedDependencyException(null, beanName, new InjectionPoint(field), ex);
 				}
+				// 把缓存值缓存起来
 				synchronized (this) {
+					// 如果没有缓存，则开始缓存
 					if (!this.cached) {
+						// 可以看到value！=null并且required=true才会进行缓存的处理
 						if (value != null || this.required) {
+							// 这里先缓存一下 desc，如果下面 utowiredBeanNames.size() > 1。则在上面从缓存中获取的时候会重新获取。
 							this.cachedFieldValue = desc;
+							// 注册依赖bean
 							registerDependentBeans(beanName, autowiredBeanNames);
+							// autowiredBeanNames里可能会有别名的名称,所以size可能大于1
 							if (autowiredBeanNames.size() == 1) {
+								// beanFactory.isTypeMatch挺重要的,因为@Autowired是按照类型注入的
 								String autowiredBeanName = autowiredBeanNames.iterator().next();
 								if (beanFactory.containsBean(autowiredBeanName) &&
 										beanFactory.isTypeMatch(autowiredBeanName, field.getType())) {
@@ -720,6 +734,7 @@ public class AutowiredAnnotationBeanPostProcessor extends InstantiationAwareBean
 				}
 			}
 			if (value != null) {
+				// 通过反射，给属性赋值
 				ReflectionUtils.makeAccessible(field);
 				field.set(bean, value);
 			}

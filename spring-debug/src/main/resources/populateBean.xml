@@ -4,13 +4,13 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-<!--    <bean id="person" class="cn.bt.populateBean.Person" autowire="byName"></bean>-->
-<!--    <bean id="person2" class="cn.bt.populateBean.Person" autowire="byType"></bean>-->
-<!--    <bean id="address" class="cn.bt.populateBean.Address">-->
-<!--        <property name="province" value="湖北"></property>-->
-<!--        <property name="city" value="黄冈"></property>-->
-<!--        <property name="town" value="黄州"></property>-->
-<!--    </bean>-->
+    <bean id="person" class="cn.bt.populateBean.Person" autowire="byName"></bean>
+    <bean id="person2" class="cn.bt.populateBean.Person" autowire="byType"></bean>
+    <bean id="address" class="cn.bt.populateBean.Address">
+        <property name="province" value="湖北"></property>
+        <property name="city" value="黄冈"></property>
+        <property name="town" value="黄州"></property>
+    </bean>
 
-    <context:component-scan base-package="cn.bt.populateBean.annotation"></context:component-scan>
+<!--    <context:component-scan base-package="cn.bt.populateBean.annotation"></context:component-scan>-->
 </beans>

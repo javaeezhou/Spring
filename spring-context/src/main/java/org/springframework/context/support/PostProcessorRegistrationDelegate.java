@@ -165,6 +165,7 @@ final class PostProcessorRegistrationDelegate {
 
 
 			// Now, invoke the postProcessBeanFactory callback of all processors handled so far.
+			// 执行BDRPP的postProcessBeanFactory方法 BDRPP 继承于 BFPP
 			invokeBeanFactoryPostProcessors(registryProcessors, beanFactory);
 			invokeBeanFactoryPostProcessors(regularPostProcessors, beanFactory);
 		}
@@ -194,6 +195,7 @@ final class PostProcessorRegistrationDelegate {
 		// 用于存放普通BeanFactoryPostProcessor的beanName
 		List<String> nonOrderedPostProcessorNames = new ArrayList<>();
 		for (String ppName : postProcessorNames) {
+			// 如果在解析BDRPP阶段解析过，此步不用再处理，因为BDRPP阶段会运行BFPP的核心方法 BDRPP 继承于 BFPP
 			if (processedBeans.contains(ppName)) {
 				// skip - already processed in first phase above
 			}
