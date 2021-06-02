@@ -688,6 +688,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// Register bean as disposable.
 		try {
 			// 注册bean对象，方便后续在容器销毁的时候销毁对象
+			// 此过程为注册bean的销毁处理过程，不要在意具体细节
 			registerDisposableBeanIfNecessary(beanName, bean, mbd);
 		}
 		catch (BeanDefinitionValidationException ex) {
@@ -1359,6 +1360,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	}
 
 	/**
+	 * 确定用于给定bean的候选构造函数，使用bean的后置处理器机制
+	 *
 	 * Determine candidate constructors to use for the given bean, checking all registered
 	 * {@link SmartInstantiationAwareBeanPostProcessor SmartInstantiationAwareBeanPostProcessors}.
 	 * @param beanClass the raw class of the bean
@@ -1510,13 +1513,14 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			// Add property values based on autowire by name if applicable.
 			// 根据autotowire的名称(如适用)添加属性值
 			if (resolvedAutowireMode == AUTOWIRE_BY_NAME) {
-				//通过bw的PropertyDescriptor属性名，查找出对应的Bean对象，将其添加到newPvs中
+				// 通过bw的PropertyDescriptor属性名，查找出对应的Bean对象，将其添加到newPvs中
 				autowireByName(beanName, mbd, bw, newPvs);
 			}
 			// Add property values based on autowire by type if applicable.
 			// 根据自动装配的类型(如果适用)添加属性值
 			if (resolvedAutowireMode == AUTOWIRE_BY_TYPE) {
-				//通过bw的PropertyDescriptor属性类型，查找出对应的Bean对象，将其添加到newPvs中
+				// 通过bw的PropertyDescriptor属性类型，查找出对应的Bean对象，
+				// 不要在此流程上停留过长时间，有一堆的判断核心就是从容器里面取
 				autowireByType(beanName, mbd, bw, newPvs);
 			}
 			//让pvs重新引用newPvs,newPvs此时已经包含了pvs的属性值以及通过AUTOWIRE_BY_NAME，AUTOWIRE_BY_TYPE自动装配所得到的属性值
@@ -1604,7 +1608,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	protected void autowireByName(
 			String beanName, AbstractBeanDefinition mbd, BeanWrapper bw, MutablePropertyValues pvs) {
 
-		//获取bw中有setter方法 && 非简单类型属性 && mbd的PropertyValues中没有该pd的属性名的 PropertyDescriptor 属性名数组
+		//获取bw中有setter方法 && 非简单类型属性 && mbd的PropertyValues中没有该pd的属性名的 PropertyDescriptor 属性名数组 --> 一般就是引用类型
 		String[] propertyNames = unsatisfiedNonSimpleProperties(mbd, bw);
 		//遍历属性名
 		for (String propertyName : propertyNames) {
