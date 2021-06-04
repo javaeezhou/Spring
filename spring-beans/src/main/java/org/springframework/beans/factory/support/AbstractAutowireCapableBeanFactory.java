@@ -2123,6 +2123,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		//InitialziingBean:当Bean的所有属性都被BeanFactory设置好后，Bean需要执行相应的接口：例如执行自定义初始化，或者仅仅是检查所有强制属性是否已经设置好。
 		//bean是InitializingBean实例标记
+		// 最后一次修改bean的属性值
 		boolean isInitializingBean = (bean instanceof InitializingBean);
 		//isExternallyManagedInitMethod是否外部受管理的Init方法名
 		//如果 bean是InitializingBean实例 && (mdb为null || 'afterPropertiesSet' 不是外部受管理的Init方法名)
