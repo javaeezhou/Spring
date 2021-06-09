@@ -1898,7 +1898,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		BeanDefinitionValueResolver valueResolver = new BeanDefinitionValueResolver(this, beanName, mbd, converter);
 
 		// Create a deep copy, resolving any references for values.
-		// 创建一个深拷贝，解析任何值引用 --> 为了保证原beanDefinition的纯净，不受影响，愈深拷贝出来的对象相互独立
+		// 创建一个深拷贝，解析任何值引用 --> 为了保证原beanDefinition的纯净，不受影响，与深拷贝出来的对象相互独立
 		List<PropertyValue> deepCopy = new ArrayList<>(original.size());
 		//是否还需要解析标记
 		boolean resolveNecessary = false;
@@ -2067,6 +2067,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		if (mbd == null || !mbd.isSynthetic()) {
 			// 将BeanPostProcessors应用到给定的现有Bean实例，调用它们的postProcessAfterInitialization方法。
 			// 返回的Bean实例可能是原始Bean包装器
+			// ****************************AOP步骤在此************************
 			wrappedBean = applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
 		}
 
