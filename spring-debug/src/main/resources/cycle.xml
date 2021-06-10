@@ -4,11 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <bean id="a" class="cn.bt.cycle.A">
-        <property name="b" ref="b"></property>
+<!--        <property name="b" ref="b"></property>-->
     </bean>
-    <bean id="b" class="cn.bt.cycle.B">
-        <property name="a" ref="a"></property>
-    </bean>
+<!--    <bean id="b" class="cn.bt.cycle.B">-->
+<!--        <property name="a" ref="a"></property>-->
+<!--    </bean>-->
 <!--    <bean id="c" class="cn.bt.cycle.C">-->
 <!--        <property name="a" ref="a"></property>-->
 <!--    </bean>-->

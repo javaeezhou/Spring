@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 public class T_B {
 	private T_A t_a;
 
-	@Autowired
-	public T_B(T_A t_a) {
-		this.t_a = t_a;
-	}
+//	@Autowired
+//	public T_B(T_A t_a) {
+//		this.t_a = t_a;
+//	}
 
 	public String getMsg(){
 		return "周谦你真的好帅！";

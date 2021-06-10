@@ -98,7 +98,7 @@ public abstract class AbstractPropertyAccessor extends TypeConverterSupport impl
 			}
 			catch (NotWritablePropertyException ex) {
 				if (!ignoreUnknown) {
-					throw ex;
+ 					throw ex;
 				}
 				// Otherwise, just ignore it and continue...
 			}

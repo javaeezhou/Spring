@@ -1936,7 +1936,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 						!PropertyAccessorUtils.isNestedOrIndexedProperty(propertyName);
 				//如果可转换
 				if (convertible) {
-					//将resolvedValue转换为指定的目标属性对象
+					//将resolvedValue转换为指定的目标属性对象 这里面有对setget方法标记的操作，作用：比如后续如果进行set注入的话没有set方法的话会抛异常
 					convertedValue = convertForProperty(resolvedValue, propertyName, bw, converter);
 				}
 				// Possibly store converted value in merged bean definition,

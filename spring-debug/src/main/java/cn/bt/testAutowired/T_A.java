@@ -17,10 +17,10 @@ public class T_A {
 
 	// 该注解放在有参构造器上，在spring解析构造器的过程中，会找到该参数，如果是引用类型则进行实例化
 //	@Autowired
-	public T_A(T_B b) {
-//		this.msg = b.getMsg();
-		this.t_b = b;
-	}
+//	public T_A(T_B b) {
+////		this.msg = b.getMsg();
+//		this.t_b = b;
+//	}
 
 	public String getMsg() {
 		return msg;
