@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class A {
 
-    @Autowired
+//    @Autowired
     private B b;
 
     public B getB() {

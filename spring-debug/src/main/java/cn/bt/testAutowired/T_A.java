@@ -3,6 +3,8 @@ package cn.bt.testAutowired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
 /**
  * @author zhouqian
  * @create 2021-06-02 16:24
@@ -10,7 +12,7 @@ import org.springframework.stereotype.Component;
 // 测试循环依赖
 @Component
 public class T_A {
-
+	@Resource
 	private T_B t_b;
 
 	private String msg;
@@ -33,7 +35,7 @@ public class T_A {
 	public T_B getT_b() {
 		return t_b;
 	}
-	@Autowired
+//	@Autowired
 	public void setT_b(T_B t_b) {
 		this.t_b = t_b;
 	}

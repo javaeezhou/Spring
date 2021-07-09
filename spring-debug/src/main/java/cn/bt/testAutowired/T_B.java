@@ -24,7 +24,7 @@ public class T_B {
 		return t_a;
 	}
 
-	@Autowired
+//	@Autowired
 	public void setT_a(T_A t_a) {
 		this.t_a = t_a;
 	}
