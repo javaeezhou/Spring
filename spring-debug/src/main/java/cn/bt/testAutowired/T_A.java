@@ -12,17 +12,17 @@ import javax.annotation.Resource;
 // 测试循环依赖
 @Component
 public class T_A {
-	@Resource
+//	@Resource
 	private T_B t_b;
 
 	private String msg;
 
 	// 该注解放在有参构造器上，在spring解析构造器的过程中，会找到该参数，如果是引用类型则进行实例化
-//	@Autowired
-//	public T_A(T_B b) {
-////		this.msg = b.getMsg();
-//		this.t_b = b;
-//	}
+	@Autowired
+	public T_A(T_B b) {
+//		this.msg = b.getMsg();
+		this.t_b = b;
+	}
 
 	public String getMsg() {
 		return msg;

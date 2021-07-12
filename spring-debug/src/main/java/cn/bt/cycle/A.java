@@ -11,9 +11,9 @@ public class A {
         return b;
     }
 
-//    public void setB(B b) {
-//        this.b = b;
-//    }
+    public void setB(B b) {
+        this.b = b;
+    }
 
     @Override
     public String toString() {
@@ -21,8 +21,4 @@ public class A {
                 "b=" + b +
                 '}';
     }
-
-//	public void setB(B b) {
-//		this.b = b;
-//	}
 }

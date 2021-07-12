@@ -12,7 +12,5 @@ public class TestAutowired {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("testAutowired.xml");
 //		T_A t_a = (T_A) ac.getBean("t_A");
 //		System.out.println(t_a.getMsg());
-		T_A t_a = new T_A();
-		System.out.println(t_a.getT_b().getMsg());
 	}
 }

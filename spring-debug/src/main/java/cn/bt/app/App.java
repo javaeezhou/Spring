@@ -30,9 +30,7 @@ public class App {
 //		System.out.println(student);
 //		System.out.println(ac.getBean("&myFactoryBean"));
 
-//		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("factoryBean.xml");
-//		MyFactoryBean myFactoryBean = (MyFactoryBean) ac.getBean("&myFactoryBean");
-//		Student student = (Student) ac.getBean("myFactoryBean");
+
 //		System.out.println(myFactoryBean);//print MyFactoryBean@255316f2
 //		System.out.println(student);//print Student{name='韩金轮', age=32}
 
